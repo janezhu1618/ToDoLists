@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ChameleonFramework
 
 class ItemTableViewController: UITableViewController {
 
@@ -28,11 +29,28 @@ class ItemTableViewController: UITableViewController {
         fetchItems()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if let color = selectedCategory?.hexColorString {
+            title = selectedCategory!.name
+            guard let navBar = navigationController?.navigationBar else {
+                fatalError("navigation controller does not exist")
+            }
+            navBar.barTintColor = UIColor(hexString: color)
+            searchBar.barTintColor = UIColor(hexString: color)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
         let item = itemsArray[indexPath.row]
         cell.textLabel?.text = item.title!
         cell.accessoryType = item.done ? .checkmark : .none
+        if let color = UIColor.init(hexString: selectedCategory?.hexColorString).darken(byPercentage: CGFloat(indexPath.row)/CGFloat(itemsArray.count)) {
+            cell.backgroundColor = color
+            cell.textLabel?.textColor = ContrastColorOf(backgroundColor: color, returnFlat: true)
+        }
+        
         return cell
     }
     

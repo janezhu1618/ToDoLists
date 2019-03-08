@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ChameleonFramework
 
 class CategoryTableViewController: UITableViewController {
     
@@ -49,6 +50,9 @@ class CategoryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         let category = categoriesArray[indexPath.row]
         cell.textLabel?.text = category.name
+        let color = UIColor.init(hexString: category.hexColorString)
+        cell.backgroundColor = color
+        cell.textLabel?.textColor = ContrastColorOf(backgroundColor: color!, returnFlat: true)
         return cell
     }
     
@@ -64,6 +68,7 @@ class CategoryTableViewController: UITableViewController {
             }
             let newCategory = Category(context: self.context)
             newCategory.name = categoryName
+            newCategory.hexColorString = UIColor.randomFlat()?.hexValue()
             self.categoriesArray.append(newCategory)
             self.saveCategories()
         }))
@@ -79,5 +84,11 @@ class CategoryTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             destination.selectedCategory = categoriesArray[indexPath.row]
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        context.delete(categoriesArray[indexPath.row])
+        categoriesArray.remove(at: indexPath.row)
+        saveCategories()
     }
 }
