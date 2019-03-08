@@ -23,4 +23,4 @@ ToDoLists uses Core Data to save information.
 
 # GIFs
 ![](toDoListsGif1.gif)
-![](toDoListsGif2.gif)
+![](toDoListsGif1a.gif)
