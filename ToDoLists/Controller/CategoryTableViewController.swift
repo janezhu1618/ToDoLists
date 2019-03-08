@@ -74,4 +74,10 @@ class CategoryTableViewController: UITableViewController {
         performSegue(withIdentifier: "goToItems", sender: self)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as! ItemTableViewController
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destination.selectedCategory = categoriesArray[indexPath.row]
+        }
+    }
 }

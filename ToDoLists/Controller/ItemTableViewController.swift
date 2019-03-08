@@ -13,6 +13,12 @@ class ItemTableViewController: UITableViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
+    public var selectedCategory: Category? {
+        didSet {
+            fetchItems()
+        }
+    }
+    
     private var itemsArray = [Item]()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -50,6 +56,7 @@ class ItemTableViewController: UITableViewController {
                 return
             }
             let newItem = Item(context: self.context)
+            newItem.parentCategory = self.selectedCategory
             newItem.title = itemTitle
             newItem.done = false
             self.itemsArray.append(newItem)
@@ -75,7 +82,14 @@ class ItemTableViewController: UITableViewController {
         title = "Items (\(itemsArray.count))"
     }
     
-    fileprivate func fetchItems(_ request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    fileprivate func fetchItems(_ request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
         do {
             itemsArray = try context.fetch(request)
         } catch {
