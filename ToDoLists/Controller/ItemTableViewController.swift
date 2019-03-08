@@ -97,7 +97,7 @@ class ItemTableViewController: UITableViewController {
             print("error saving context")
         }
         tableView.reloadData()
-        title = "Items (\(itemsArray.count))"
+        title = "\(selectedCategory!.name) (\(itemsArray.count))"
     }
     
     fileprivate func fetchItems(_ request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
@@ -114,7 +114,7 @@ class ItemTableViewController: UITableViewController {
             print("error fetching serached term")
         }
         tableView.reloadData()
-        title = "Items (\(itemsArray.count))"
+        title = "\(selectedCategory!.name) (\(itemsArray.count))"
     }
 }
 
