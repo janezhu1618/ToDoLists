@@ -17,8 +17,10 @@ $ open ToDoLists.xcworkspace
 ```
 
 # Usage
-User can simple add a new category by pressing the "+" button at the top right corner.  After a category is created, the user can click on the category to go to another page that allows them to add items underneath this category.  
+User can simple add a new category by pressing the "+" button at the top right corner.  After a category is created, the user can click on the category to go to another page that allows them to add items underneath this category.  User can tap on the item to check it off when the task is completed. To delete a category or an item, simply swipe left to display the delete button.
 
 ToDoLists uses Core Data to save information. 
 
 # GIFs
+![](toDoListsGif1.gif)
+![](toDoListsGif2.gif)
