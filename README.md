@@ -8,7 +8,7 @@ Being forgetful is an issue that most people have.  People often don't remember 
 - Swift 4
 - Xcode 10.1
 - Core Data
-- Cocoapods: ChameleonFramework
+- Cocoapod: ChameleonFramework
 
 # To run this project, install it locally using Terminal...
 ```
@@ -23,4 +23,4 @@ ToDoLists uses Core Data to save information.
 
 # GIFs
 ![](toDoListsGif1.gif)
-![](toDoListsGif1a.gif)
+![](toDOListsGif1a.gif)
