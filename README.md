@@ -10,7 +10,8 @@ Being forgetful is an issue that most people have.  People often don't remember 
 - Core Data
 - Cocoapod: ChameleonFramework
 
-# To run this project, install it locally using Terminal...
+# Setup
+To run this project, install it locally using Terminal...
 ```
 $ git clone https://github.com/janezhu1618/ToDoLists
 $ open ToDoLists.xcworkspace
